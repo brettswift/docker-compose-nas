@@ -95,8 +95,6 @@ services:
       - homepage.widget.type=sonarr
       - homepage.widget.url=http://sonarr:8989/sonarr
       - homepage.widget.key=${SONARR_API_KEY}
-      - traefik.http.routers.sonarr.middlewares=sonarr-stripprefix
-      - traefik.http.middlewares.sonarr-stripprefix.stripprefix.prefixes=/sonarr
   radarr:
     image: lscr.io/linuxserver/radarr
     container_name: radarr
