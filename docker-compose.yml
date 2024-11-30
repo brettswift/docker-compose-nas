@@ -94,6 +94,8 @@ services:
       - homepage.widget.type=sonarr
       - homepage.widget.url=http://sonarr:8989/sonarr
       - homepage.widget.key=${SONARR_API_KEY}
+      - traefik.http.routers.sonarr.middlewares=sonarr-stripprefix
+      - traefik.http.middlewares.sonarr-stripprefix.stripprefix.prefixes=/sonarr
   radarr:
     image: lscr.io/linuxserver/radarr
     container_name: radarr
@@ -124,6 +126,8 @@ services:
       - homepage.widget.type=radarr
       - homepage.widget.url=http://radarr:7878/radarr
       - homepage.widget.key=${RADARR_API_KEY}
+      - traefik.http.routers.radarr.middlewares=radarr-stripprefix
+      - traefik.http.middlewares.radarr-stripprefix.stripprefix.prefixes=/radarr
   lidarr:
     image: lscr.io/linuxserver/lidarr
     container_name: lidarr
@@ -154,6 +158,8 @@ services:
       - homepage.widget.type=lidarr
       - homepage.widget.url=http://lidarr:8686/lidarr
       - homepage.widget.key=${LIDARR_API_KEY}
+      - traefik.http.routers.lidarr.middlewares=lidarr-stripprefix
+      - traefik.http.middlewares.lidarr-stripprefix.stripprefix.prefixes=/lidarr
     profiles:
       - lidarr
   bazarr:
@@ -186,6 +192,8 @@ services:
       - homepage.widget.type=bazarr
       - homepage.widget.url=http://bazarr:6767/bazarr
       - homepage.widget.key=${BAZARR_API_KEY}
+      - traefik.http.routers.bazarr.middlewares=bazarr-stripprefix
+      - traefik.http.middlewares.bazarr-stripprefix.stripprefix.prefixes=/bazarr
   jellyseerr:
     image: fallenbagel/jellyseerr:latest
     container_name: jellyseerr
@@ -287,6 +295,8 @@ services:
       - homepage.widget.type=prowlarr
       - homepage.widget.url=http://prowlarr:9696/prowlarr
       - homepage.widget.key=${PROWLARR_API_KEY}
+      - traefik.http.routers.prowlarr.middlewares=prowlarr-stripprefix
+      - traefik.http.middlewares.prowlarr-stripprefix.stripprefix.prefixes=/prowlarr
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
     container_name: flaresolverr
@@ -430,6 +440,8 @@ services:
       - homepage.widget.type=sabnzbd
       - homepage.widget.url=http://sabnzbd:8080/sabnzbd
       - homepage.widget.key=${SABNZBD_API_KEY}
+      - traefik.http.routers.sabnzbd.middlewares=sabnzbd-stripprefix
+      - traefik.http.middlewares.sabnzbd-stripprefix.stripprefix.prefixes=/sabnzbd
     profiles:
       - sabnzbd
   jellyfin:
@@ -466,6 +478,8 @@ services:
       - homepage.widget.type=jellyfin
       - homepage.widget.url=http://jellyfin:8096/jellyfin
       - homepage.widget.key=${JELLYFIN_API_KEY}
+      - traefik.http.routers.jellyfin.middlewares=jellyfin-stripprefix
+      - traefik.http.middlewares.jellyfin-stripprefix.stripprefix.prefixes=/jellyfin
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
@@ -507,6 +521,8 @@ services:
       - traefik.http.middlewares.homepage-security.headers.stsPreload=true
       # Apply middlewares
       - traefik.http.routers.homepage.middlewares=homepage-headers,homepage-security
+      - traefik.http.routers.homepage.middlewares=homepage-stripprefix
+      - traefik.http.middlewares.homepage-stripprefix.stripprefix.prefixes=/
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
