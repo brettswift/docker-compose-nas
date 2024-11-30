@@ -76,7 +76,7 @@ services:
       - ${DATA_ROOT}:/data
     restart: always
     healthcheck:
-      test: [ "CMD", "curl", "--fail", "http://127.0.0.1:8989/sonarr/ping" ]
+      test: [ "CMD", "curl", "--fail", "http://127.0.0.1:8989/ping" ]
       interval: 30s
       retries: 10
     labels:
@@ -92,7 +92,7 @@ services:
       - homepage.description=Series management
       - homepage.weight=0
       - homepage.widget.type=sonarr
-      - homepage.widget.url=http://sonarr:8989/sonarr
+      - homepage.widget.url=http://sonarr:8989
       - homepage.widget.key=${SONARR_API_KEY}
       - traefik.http.routers.sonarr.middlewares=sonarr-stripprefix
       - traefik.http.middlewares.sonarr-stripprefix.stripprefix.prefixes=/sonarr
@@ -520,8 +520,7 @@ services:
       - traefik.http.middlewares.homepage-security.headers.stsIncludeSubdomains=true
       - traefik.http.middlewares.homepage-security.headers.stsPreload=true
       # Apply middlewares
-      - traefik.http.routers.homepage.middlewares=homepage-headers,homepage-security
-      - traefik.http.routers.homepage.middlewares=homepage-stripprefix
+      - traefik.http.routers.homepage.middlewares=homepage-headers,homepage-security,homepage-stripprefix
       - traefik.http.middlewares.homepage-stripprefix.stripprefix.prefixes=/
   watchtower:
     image: containrrr/watchtower
