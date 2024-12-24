@@ -36,7 +36,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "8090:8080"
     volumes:
       - ${CONFIG_ROOT:-.}/letsencrypt:/letsencrypt
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
@@ -412,6 +411,8 @@ services:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
       - TZ=${TIMEZONE}
+      - SABNZBD_HOST_WHITELIST_ENTRIES=${HOSTNAME}
+      - SABNZBD__HOST_WHITELIST=${HOSTNAME}
     volumes:
       - ${CONFIG_ROOT:-.}/sabnzbd:/config
       - ${DATA_ROOT}:/data
@@ -421,7 +422,7 @@ services:
       - traefik.http.routers.sabnzbd.rule=(Host(`${HOSTNAME}`) && PathPrefix(`/sabnzbd`))
       - traefik.http.routers.sabnzbd.tls=true
       - traefik.http.routers.sabnzbd.tls.certresolver=myresolver
-      - traefik.http.services.sabnzbd.loadbalancer.server.port=8080
+      - traefik.http.services.sabnzbd.loadbalancer.server.port=8081
       - homepage.group=Download
       - homepage.name=Sabnzbd
       - homepage.icon=sabnzbd.png
