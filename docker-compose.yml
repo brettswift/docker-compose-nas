@@ -415,7 +415,8 @@ services:
       - SABNZBD__HOST_WHITELIST=${HOSTNAME}
     volumes:
       - ${CONFIG_ROOT:-.}/sabnzbd:/config
-      - ${DATA_ROOT}:/data
+      - ${DOWNLOAD_ROOT}:/downloads    # Temporary download location
+      - ${DATA_ROOT}/media:/data/media # Final media location matching Radarr / Sonarr
     restart: always
     labels:
       - traefik.enable=true
