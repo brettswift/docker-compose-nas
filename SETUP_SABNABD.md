@@ -25,3 +25,8 @@ processing = 3
 script = None
 
 ```
+
+> Note: Sonarr and Radarr will look for /downloads by default.  Because the category 'tv' and 'movies' are both set in `sabnzbd.ini` sonarr and radarr will know to see new files there and import them accordingly. 
+>
+> This is a bit different than torrents where unpackerr is involved
+
