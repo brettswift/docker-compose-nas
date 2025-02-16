@@ -74,7 +74,7 @@ services:
     volumes:
       - ${CONFIG_ROOT:-.}/sonarr:/config
       - ${DATA_ROOT}:/data
-      - ${DOWNLOAD_ROOT}:/downloads     # Access to downloads to import from sabnzbd
+      - ${DATA_ROOT}/usenet/complete:/downloads     # Access to downloads to import from sabnzbd
     restart: always
     healthcheck:
       test: [ "CMD", "curl", "--fail", "http://127.0.0.1:8989/sonarr/ping" ]
@@ -105,7 +105,7 @@ services:
     volumes:
       - ${CONFIG_ROOT:-.}/radarr:/config
       - ${DATA_ROOT}:/data
-      - ${DOWNLOAD_ROOT}:/downloads     # Access to downloads to import from sabnzbd
+      - ${DATA_ROOT}/usenet/complete:/downloads     # Access to downloads to import from sabnzbd
     restart: always
     healthcheck:
       test: [ "CMD", "curl", "--fail", "http://127.0.0.1:7878/radarr/ping" ]
@@ -417,7 +417,7 @@ services:
       - SABNZBD__HOST_WHITELIST=${HOSTNAME}
     volumes:
       - ${CONFIG_ROOT:-.}/sabnzbd:/config
-      - ${DOWNLOAD_ROOT}:/downloads    # Temporary download location
+      - ${DATA_ROOT}/usenet/complete:/downloads     # Access to downloads to import from sabnzbd
     restart: always
     labels:
       - traefik.enable=true
