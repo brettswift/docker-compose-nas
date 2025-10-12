@@ -30,7 +30,7 @@ services:
       - --certificatesresolvers.myresolver.acme.email=${LETS_ENCRYPT_EMAIL}
       - --certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json
       - --api.dashboard=true
-      - --api.insecure=false
+      - --api.insecure=true
       - --api=true
       - --serverstransport.insecureskipverify=true
     ports:
